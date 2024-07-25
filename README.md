@@ -6,7 +6,7 @@
 
 Java Backend Project Using Spring Boot
 
-## Entity Relationship Diagram - v1
+## Entity Relationship Diagram - v1 
 
 ![ERD](src/main/java/be/keivy/tfticlabosoloback/docs/diagrams/flea_market_organizer.svg)
 
