@@ -1,6 +1,6 @@
 package be.keivy.fleamartapp.domain.enums;
 
-public enum SubsStatus {
+public enum RegistrationStatus {
     SUBMITTED,
     ACCEPTED,
     REJECTED,

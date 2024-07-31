@@ -1,6 +1,6 @@
 package be.keivy.fleamartapp.domain.entities;
 
-import be.keivy.fleamartapp.domain.enums.SubsStatus;
+import be.keivy.fleamartapp.domain.enums.RegistrationStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,7 +21,7 @@ public class Registration extends BaseEntity<Long> {
 
     @Column(name = "subs_status", nullable = false)
     @Enumerated(EnumType.STRING)
-    private SubsStatus subsStatus;
+    private RegistrationStatus subsStatus;
 
     @Column(name ="reserved_meter", nullable = false)
     private int reservedMeter;
