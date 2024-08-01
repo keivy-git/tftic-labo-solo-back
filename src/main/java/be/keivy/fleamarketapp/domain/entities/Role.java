@@ -1,4 +1,4 @@
-package be.keivy.fleamartapp.domain.entities;
+package be.keivy.fleamarketapp.domain.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
