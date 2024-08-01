@@ -1,6 +1,6 @@
-package be.keivy.fleamartapp.dal.repositories;
+package be.keivy.fleamarketapp.dal.repositories;
 
-import be.keivy.fleamartapp.domain.entities.FleaMarket;
+import be.keivy.fleamarketapp.domain.entities.FleaMarket;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

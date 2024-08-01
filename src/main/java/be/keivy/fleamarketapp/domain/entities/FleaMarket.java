@@ -1,4 +1,4 @@
-package be.keivy.fleamartapp.domain.entities;
+package be.keivy.fleamarketapp.domain.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -44,4 +44,8 @@ public class FleaMarket extends BaseEntity<Long> {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
+
+    @ManyToOne
+    @JoinColumn(nullable = false, name = "organizer_id")
+    private Organizer organizer;
 }
