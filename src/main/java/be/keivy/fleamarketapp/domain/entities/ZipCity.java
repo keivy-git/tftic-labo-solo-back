@@ -1,6 +1,5 @@
-package be.keivy.fleamartapp.domain.entities;
+package be.keivy.fleamarketapp.domain.entities;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
