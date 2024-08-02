@@ -13,4 +13,12 @@ public class SecondHandDealerRegisterRequest extends RegisterRequest {
 
     @NotNull(message = "There must be a birth date")
     private LocalDate birthDate;
+
+    /**
+     * @return
+     */
+    @Override
+    public String getRoleName() {
+        return "";
+    }
 }

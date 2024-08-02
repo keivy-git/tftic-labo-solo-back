@@ -1,24 +1,48 @@
 package be.keivy.fleamarketapp.bll.services.impls;
 
+import be.keivy.fleamarketapp.bll.services.IAuthService;
 import be.keivy.fleamarketapp.bll.services.IUserService;
+import be.keivy.fleamarketapp.common.dtos.auth.requests.OrganizerRegisterRequest;
+import be.keivy.fleamarketapp.common.dtos.auth.requests.SecondHandDealerRegisterRequest;
 import be.keivy.fleamarketapp.common.dtos.auth.responses.UserTokenResponse;
 import be.keivy.fleamarketapp.common.dtos.user.requests.OrganizerUpdateRequest;
 import be.keivy.fleamarketapp.common.dtos.user.requests.SecondHandDealerUpdateRequest;
 import be.keivy.fleamarketapp.common.dtos.user.responses.OrganizerResponse;
 import be.keivy.fleamarketapp.common.dtos.user.responses.SecondHandDealerResponse;
 import be.keivy.fleamarketapp.common.dtos.user.responses.UserResponse;
+import be.keivy.fleamarketapp.common.exceptions.NotAllowedException;
+import be.keivy.fleamarketapp.common.exceptions.NotFoundException;
+import be.keivy.fleamarketapp.common.exceptions.auth.UserAlreadyExistsException;
+import be.keivy.fleamarketapp.common.exceptions.auth.UserNotFoundException;
+import be.keivy.fleamarketapp.common.mappers.user.UserMapper;
+import be.keivy.fleamarketapp.dal.repositories.OrganizerRepository;
+import be.keivy.fleamarketapp.dal.repositories.RoleRepository;
+import be.keivy.fleamarketapp.dal.repositories.SecondHandDealerRepository;
 import be.keivy.fleamarketapp.dal.repositories.UserRepository;
+import be.keivy.fleamarketapp.domain.entities.Organizer;
+import be.keivy.fleamarketapp.domain.entities.Role;
 import be.keivy.fleamarketapp.domain.entities.SecondHandDealer;
+import be.keivy.fleamarketapp.domain.entities.User;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.management.relation.RoleNotFoundException;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
 public class UserService implements IUserService {
 
     private final UserRepository userRepository;
+    private final OrganizerRepository organizerRepository;
+    private final SecondHandDealerRepository secondHandDealerRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final RoleRepository roleRepository;
+    private final UserMapper userMapper;
+    private final IAuthService authService;
 
     /**
      * Récupère tous les utilisateurs.
@@ -26,7 +50,9 @@ public class UserService implements IUserService {
      */
     @Override
     public List<UserResponse> getAll() {
-        return List.of();
+        return userRepository.findAll().stream()
+                .map(userMapper::fromUser)
+                .toList();
     }
 
     /**
@@ -35,7 +61,9 @@ public class UserService implements IUserService {
      */
     @Override
     public List<OrganizerResponse> getAllOrganizer() {
-        return List.of();
+        return organizerRepository.findAll().stream()
+                .map(userMapper::fromOrganizer)
+                .toList();
     }
 
     /**
@@ -44,7 +72,10 @@ public class UserService implements IUserService {
      */
     @Override
     public List<SecondHandDealerResponse> getAllSecondHandDealer() {
-        return List.of();
+        return secondHandDealerRepository.findAll()
+                .stream()
+                .map(userMapper::fromSecondHandDealer)
+                .toList();
     }
 
     /**
@@ -54,7 +85,9 @@ public class UserService implements IUserService {
      */
     @Override
     public UserResponse getById(Long id) {
-        return null;
+        return userMapper.fromUser(
+                userRepository.findById(id).orElseThrow(UserNotFoundException::new)
+        );
     }
 
     /**
@@ -64,7 +97,9 @@ public class UserService implements IUserService {
      */
     @Override
     public UserResponse getByMail(String email) {
-        return null;
+        return userMapper.fromUser(
+                userRepository.findByEmail(email).orElseThrow(UserNotFoundException::new)
+        );
     }
 
     /**
@@ -74,7 +109,9 @@ public class UserService implements IUserService {
      */
     @Override
     public UserResponse getByPhone(String phone) {
-        return null;
+        return userMapper.fromUser(
+                userRepository.findByPhone(phone).orElseThrow(UserNotFoundException::new)
+        );
     }
 
     /**
@@ -82,17 +119,38 @@ public class UserService implements IUserService {
      * @return le nouvel organisateur ajouté.
      */
     @Override
-    public OrganizerResponse addOrganizer() {
-        return null;
-    }
+    @Transactional
+    public OrganizerResponse addOrganizer(OrganizerRegisterRequest request) throws RoleNotFoundException {
+        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
+            throw new UserAlreadyExistsException();
+        }
+        Role role = roleRepository.findByName("ORGANIZER")
+                .orElseThrow(() -> new RoleNotFoundException("Role ORGANIZER not found"));
 
+        request.setPassword(passwordEncoder.encode(request.getPassword()));
+
+        Organizer organizer = userMapper.toEntity(request, Set.of(role));
+
+        return userMapper.fromOrganizer(organizerRepository.save(organizer));
+    }
     /**
      * Ajoute un nouveau brocanteur.
+     * @param request la requête d'enregistrement contenant les détails du brocanteur
      * @return le nouveau brocanteur ajouté.
      */
     @Override
-    public SecondHandDealer addSecondHandDealer() {
-        return null;
+    public SecondHandDealerResponse addSecondHandDealer(SecondHandDealerRegisterRequest request) throws RoleNotFoundException {
+        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
+            throw new UserAlreadyExistsException();
+        }
+        Role role = roleRepository.findByName("SECOND_HAND_DEALER")
+                .orElseThrow(() -> new RoleNotFoundException("Role SECOND_HAND_DEALER not found"));
+
+        request.setPassword(passwordEncoder.encode(request.getPassword()));
+
+        SecondHandDealer secondHandDealer = userMapper.toEntity(request, Set.of(role));
+
+        return userMapper.fromSecondHandDealer(secondHandDealerRepository.save(secondHandDealer));
     }
 
     /**
@@ -103,7 +161,11 @@ public class UserService implements IUserService {
      */
     @Override
     public OrganizerResponse updateOrganizer(Long id, OrganizerUpdateRequest request) {
-        return null;
+        Organizer organizer = organizerRepository.findById(id).orElseThrow(UserNotFoundException::new);
+
+        userMapper.updateEntityFromRequest(request, organizer);
+
+        return userMapper.fromOrganizer(userRepository.save(organizer));
     }
 
     /**
@@ -114,7 +176,11 @@ public class UserService implements IUserService {
      */
     @Override
     public SecondHandDealerResponse updateSecondHandDealer(Long id, SecondHandDealerUpdateRequest request) {
-        return null;
+        SecondHandDealer secondHandDealer = secondHandDealerRepository.findById(id).orElseThrow(UserNotFoundException::new);
+
+        userMapper.updateEntityFromRequest(request, secondHandDealer);
+
+        return userMapper.fromSecondHandDealer(userRepository.save(secondHandDealer));
     }
 
     /**
@@ -125,7 +191,16 @@ public class UserService implements IUserService {
      */
     @Override
     public UserResponse triggerLock(Long id, boolean isLocked) {
-        return null;
+        User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+
+//%s : permet d'afficher si c'est true ou false de 'isLocked'
+        if (!user.isAccountNonLocked() == isLocked) {
+            throw new NotAllowedException(String.format("User field 'isLocked' already defined to '%s'", isLocked));
+        }
+
+         user.setLocked(isLocked);
+
+        return userMapper.fromUser(userRepository.save(user));
     }
 
     /**
@@ -136,7 +211,15 @@ public class UserService implements IUserService {
      */
     @Override
     public UserResponse triggerUnlock(Long id, boolean isEnabled) {
-        return null;
+        User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+
+        if (user.isEnabled() == isEnabled) {
+            throw new NotAllowedException(String.format("User field 'isEnabled' already defined to '%s'", isEnabled));
+        }
+
+        user.setEnabled(isEnabled);
+
+        return userMapper.fromUser(userRepository.save(user));
     }
 
     /**
@@ -146,7 +229,9 @@ public class UserService implements IUserService {
      */
     @Override
     public UserTokenResponse impersonateUserById(Long id) {
-        return null;
+        User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+
+        return authService.impersonateUser(user);
     }
 
     /**
@@ -156,6 +241,8 @@ public class UserService implements IUserService {
      */
     @Override
     public UserTokenResponse impersonateUserByEmail(String email) {
-        return null;
+        User user = userRepository.findByEmail(email).orElseThrow(UserNotFoundException::new);
+
+        return authService.impersonateUser(user);
     }
 }

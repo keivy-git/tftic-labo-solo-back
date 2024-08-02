@@ -36,4 +36,6 @@ public abstract class RegisterRequest {
 
     @NotBlank(message = "There must be a phone number")
     private String phoneNumber;
+
+    public abstract String getRoleName();
 }

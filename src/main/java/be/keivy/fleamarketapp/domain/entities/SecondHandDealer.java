@@ -6,7 +6,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,7 +20,7 @@ import java.util.Set;
 public class SecondHandDealer extends User {
 
     @Column(name = "birth_date", nullable = false)
-    private LocalDateTime birthDate;
+    private LocalDate birthDate;
 
     @OneToMany(mappedBy = "secondHandDealer")
     private Set<Registration> registrations;

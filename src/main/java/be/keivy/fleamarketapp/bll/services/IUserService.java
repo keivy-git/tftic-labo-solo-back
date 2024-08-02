@@ -1,5 +1,7 @@
 package be.keivy.fleamarketapp.bll.services;
 
+import be.keivy.fleamarketapp.common.dtos.auth.requests.OrganizerRegisterRequest;
+import be.keivy.fleamarketapp.common.dtos.auth.requests.SecondHandDealerRegisterRequest;
 import be.keivy.fleamarketapp.common.dtos.auth.responses.UserTokenResponse;
 import be.keivy.fleamarketapp.common.dtos.user.requests.OrganizerUpdateRequest;
 import be.keivy.fleamarketapp.common.dtos.user.requests.SecondHandDealerUpdateRequest;
@@ -8,6 +10,7 @@ import be.keivy.fleamarketapp.common.dtos.user.responses.SecondHandDealerRespons
 import be.keivy.fleamarketapp.common.dtos.user.responses.UserResponse;
 import be.keivy.fleamarketapp.domain.entities.SecondHandDealer;
 
+import javax.management.relation.RoleNotFoundException;
 import java.util.List;
 
 /** * Le service utilisateur. Contient des méthodes de gestion des utilisateurs.
@@ -42,7 +45,6 @@ public interface IUserService {
     UserResponse getById(Long id);
     /**
      * Récupère un utilisateur par son email.
-     *
      * @param email l'email de l'utilisateur.
      * @return l'utilisateur correspondant à l'email.
      */
@@ -50,7 +52,6 @@ public interface IUserService {
 
     /**
      * Récupère un utilisateur par son numéro de téléphone.
-     *
      * @param phone le numéro de téléphone de l'utilisateur.
      * @return l'utilisateur correspondant au numéro de téléphone.
      */
@@ -60,13 +61,13 @@ public interface IUserService {
      * Ajoute un nouvel organisateur.
      * @return le nouvel organisateur ajouté.
      */
-    OrganizerResponse addOrganizer();
+    OrganizerResponse addOrganizer(OrganizerRegisterRequest request) throws RoleNotFoundException;
 
     /**
      * Ajoute un nouveau brocanteur.
      * @return le nouveau brocanteur ajouté.
      */
-    SecondHandDealer addSecondHandDealer();
+    SecondHandDealerResponse addSecondHandDealer(SecondHandDealerRegisterRequest request) throws RoleNotFoundException;
 
     /**
      * Met à jour un organisateur existant.
