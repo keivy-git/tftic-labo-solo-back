@@ -1,8 +1,6 @@
 package be.keivy.fleamarketapp.domain.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -10,9 +8,13 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper = true)
 @Table(name = "zip_city")
-public class ZipCity extends BaseEntity<Long> {
+public class ZipCity {
+
+    @Id
+    @Column(name = "zip_city_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Column(name = "zip", nullable = false)
     private String zip;

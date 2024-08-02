@@ -10,8 +10,6 @@ import org.mapstruct.Mapping;
 public interface ZipCityMapper {
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "updatedAt", ignore = true)
     ZipCity toEntity(ZipCityRequest request);
 
     ZipCityResponse fromEntity(ZipCity entity);
