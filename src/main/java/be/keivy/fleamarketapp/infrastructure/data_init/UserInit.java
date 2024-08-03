@@ -27,11 +27,6 @@ public class UserInit implements CommandLineRunner {
     private final PasswordEncoder passwordEncoder;
     private final ZipCityRepository zipCityRepository;
 
-
-    /**
-     * @param args
-     * @throws Exception
-     */
     @Override
     public void run(String... args) throws Exception {
 

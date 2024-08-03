@@ -16,10 +16,7 @@ import java.util.List;
 public class RoleInit implements CommandLineRunner {
 
     private final RoleRepository roleRepository;
-    /**
-     * @param args
-     * @throws Exception
-     */
+
     @Override
     public void run(String... args) throws Exception {
         if (roleRepository.count() == 0) {
