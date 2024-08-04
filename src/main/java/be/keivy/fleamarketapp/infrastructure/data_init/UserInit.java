@@ -28,7 +28,7 @@ public class UserInit implements CommandLineRunner {
     private final ZipCityRepository zipCityRepository;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
 
         if (secondHandDealerRepository.count() == 0 && organizerRepository.count() == 0) {
             List<Role> userRoles = roleRepository.findAll();
