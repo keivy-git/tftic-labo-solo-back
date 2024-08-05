@@ -8,9 +8,7 @@ import be.keivy.fleamarketapp.common.dtos.user.requests.SecondHandDealerUpdateRe
 import be.keivy.fleamarketapp.common.dtos.user.responses.OrganizerResponse;
 import be.keivy.fleamarketapp.common.dtos.user.responses.SecondHandDealerResponse;
 import be.keivy.fleamarketapp.common.dtos.user.responses.UserResponse;
-import be.keivy.fleamarketapp.domain.entities.SecondHandDealer;
 
-import javax.management.relation.RoleNotFoundException;
 import java.util.List;
 
 /** * Le service utilisateur. Contient des méthodes de gestion des utilisateurs.
@@ -61,13 +59,13 @@ public interface IUserService {
      * Ajoute un nouvel organisateur.
      * @return le nouvel organisateur ajouté.
      */
-    OrganizerResponse addOrganizer(OrganizerRegisterRequest request) throws RoleNotFoundException;
+    OrganizerResponse addOrganizer(OrganizerRegisterRequest request);
 
     /**
      * Ajoute un nouveau brocanteur.
      * @return le nouveau brocanteur ajouté.
      */
-    SecondHandDealerResponse addSecondHandDealer(SecondHandDealerRegisterRequest request) throws RoleNotFoundException;
+    SecondHandDealerResponse addSecondHandDealer(SecondHandDealerRegisterRequest request);
 
     /**
      * Met à jour un organisateur existant.
