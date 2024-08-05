@@ -3,7 +3,7 @@ package be.keivy.fleamarketapp.domain.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @NoArgsConstructor
@@ -27,10 +27,10 @@ public class FleaMarket extends BaseEntity<Long> {
     private String urlPicture;
 
     @Column(name = "date_begin", nullable = false)
-    private LocalDateTime dateBegin;
+    private LocalDate dateBegin;
 
     @Column(name = "date_end", nullable = false)
-    private LocalDateTime dateEnd;
+    private LocalDate dateEnd;
 
     @Column(name = "is_active", nullable = false)
     private boolean isActive;
