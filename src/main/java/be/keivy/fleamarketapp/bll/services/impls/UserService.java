@@ -11,7 +11,7 @@ import be.keivy.fleamarketapp.common.dtos.user.responses.OrganizerResponse;
 import be.keivy.fleamarketapp.common.dtos.user.responses.SecondHandDealerResponse;
 import be.keivy.fleamarketapp.common.dtos.user.responses.UserResponse;
 import be.keivy.fleamarketapp.common.exceptions.NotAllowedException;
-import be.keivy.fleamarketapp.common.exceptions.NotFoundException;
+import be.keivy.fleamarketapp.common.exceptions.role.RoleNotFoundException;
 import be.keivy.fleamarketapp.common.exceptions.auth.UserAlreadyExistsException;
 import be.keivy.fleamarketapp.common.exceptions.auth.UserNotFoundException;
 import be.keivy.fleamarketapp.common.mappers.user.UserMapper;
@@ -19,16 +19,12 @@ import be.keivy.fleamarketapp.dal.repositories.OrganizerRepository;
 import be.keivy.fleamarketapp.dal.repositories.RoleRepository;
 import be.keivy.fleamarketapp.dal.repositories.SecondHandDealerRepository;
 import be.keivy.fleamarketapp.dal.repositories.UserRepository;
-import be.keivy.fleamarketapp.domain.entities.Organizer;
-import be.keivy.fleamarketapp.domain.entities.Role;
-import be.keivy.fleamarketapp.domain.entities.SecondHandDealer;
-import be.keivy.fleamarketapp.domain.entities.User;
+import be.keivy.fleamarketapp.domain.entities.*;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.management.relation.RoleNotFoundException;
 import java.util.List;
 import java.util.Set;
 
@@ -120,12 +116,12 @@ public class UserService implements IUserService {
      */
     @Override
     @Transactional
-    public OrganizerResponse addOrganizer(OrganizerRegisterRequest request) throws RoleNotFoundException {
+    public OrganizerResponse addOrganizer(OrganizerRegisterRequest request) {
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
             throw new UserAlreadyExistsException();
         }
         Role role = roleRepository.findByName("ORGANIZER")
-                .orElseThrow(() -> new RoleNotFoundException("Role ORGANIZER not found"));
+                .orElseThrow(RoleNotFoundException::new);
 
         request.setPassword(passwordEncoder.encode(request.getPassword()));
 
@@ -139,12 +135,12 @@ public class UserService implements IUserService {
      * @return le nouveau brocanteur ajouté.
      */
     @Override
-    public SecondHandDealerResponse addSecondHandDealer(SecondHandDealerRegisterRequest request) throws RoleNotFoundException {
+    public SecondHandDealerResponse addSecondHandDealer(SecondHandDealerRegisterRequest request) {
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
             throw new UserAlreadyExistsException();
         }
         Role role = roleRepository.findByName("SECOND_HAND_DEALER")
-                .orElseThrow(() -> new RoleNotFoundException("Role SECOND_HAND_DEALER not found"));
+                .orElseThrow(RoleNotFoundException::new);
 
         request.setPassword(passwordEncoder.encode(request.getPassword()));
 

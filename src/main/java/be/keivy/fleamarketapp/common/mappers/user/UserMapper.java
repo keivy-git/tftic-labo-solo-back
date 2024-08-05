@@ -6,10 +6,7 @@ import be.keivy.fleamarketapp.common.dtos.auth.requests.SecondHandDealerRegister
 import be.keivy.fleamarketapp.common.dtos.user.requests.UserUpdateRequest;
 import be.keivy.fleamarketapp.common.dtos.user.responses.*;
 import be.keivy.fleamarketapp.common.exceptions.InvalidUserTypeException;
-import be.keivy.fleamarketapp.domain.entities.Organizer;
-import be.keivy.fleamarketapp.domain.entities.Role;
-import be.keivy.fleamarketapp.domain.entities.SecondHandDealer;
-import be.keivy.fleamarketapp.domain.entities.User;
+import be.keivy.fleamarketapp.domain.entities.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
