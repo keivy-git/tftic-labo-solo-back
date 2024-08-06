@@ -18,7 +18,6 @@ import java.util.List;
 public class RoleInit implements CommandLineRunner {
 
     private final RoleRepository roleRepository;
-    private final RoleMapper roleMapper;
 
     @Override
     public void run(String... args){
