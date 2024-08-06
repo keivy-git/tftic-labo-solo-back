@@ -4,7 +4,7 @@ import be.keivy.fleamarketapp.common.dtos.zip_city.responses.ZipCityResponse;
 
 import java.util.List;
 
-public interface IZipCity {
+public interface IZipCityService {
 
     /**
      * Affiche toute les villes et code postal
