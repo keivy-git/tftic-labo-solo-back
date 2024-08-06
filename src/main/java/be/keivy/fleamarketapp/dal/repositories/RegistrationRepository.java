@@ -25,7 +25,7 @@ public interface RegistrationRepository extends JpaRepository<Registration, Long
 
     @Modifying
     @Query("DELETE FROM Registration r WHERE r.fleaMarket.id = :fleaMarketId")
-    void deleteAllByJobOfferId(Long fleaMarketId);
+    void deleteAllByOrganizerId(Long fleaMarketId);
 
     @Modifying
     @Query("UPDATE Registration r SET r.registrationStatus = :registrationStatus WHERE r.fleaMarket.id = :fleaMarketId")
