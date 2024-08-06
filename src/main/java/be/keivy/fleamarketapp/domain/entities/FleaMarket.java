@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 @Entity
 @NoArgsConstructor
@@ -29,6 +30,9 @@ public class FleaMarket extends BaseEntity<Long> {
     @Column(name = "date_begin", nullable = false)
     private LocalDate dateBegin;
 
+    @Column(name="active_day")
+    private Long activeDay;
+
     @Column(name = "date_end", nullable = false)
     private LocalDate dateEnd;
 
@@ -41,6 +45,12 @@ public class FleaMarket extends BaseEntity<Long> {
     @Column(name="location_price")
     private int locationPrice;
 
+    @Column(name = "phone_number_event", nullable = false)
+    private String phoneNumberEvent;
+
+    @Column(name="number_of_places")
+    private int numberOfPlaces;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
@@ -48,4 +58,8 @@ public class FleaMarket extends BaseEntity<Long> {
     @ManyToOne
     @JoinColumn(nullable = false, name = "organizer_id")
     private Organizer organizer;
+
+    public void setActiveDay(Long activeDay) {
+        this.activeDay = ChronoUnit.DAYS.between(dateBegin,  dateEnd);
+    }
 }
