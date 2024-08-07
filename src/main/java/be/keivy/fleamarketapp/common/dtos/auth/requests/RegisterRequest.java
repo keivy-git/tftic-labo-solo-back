@@ -1,7 +1,5 @@
 package be.keivy.fleamarketapp.common.dtos.auth.requests;
 
-import be.keivy.fleamarketapp.domain.entities.Address;
-import be.keivy.fleamarketapp.domain.entities.ZipCity;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
