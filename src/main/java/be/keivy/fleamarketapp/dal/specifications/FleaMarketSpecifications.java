@@ -21,7 +21,7 @@ public interface FleaMarketSpecifications {
     static Specification<FleaMarket> filterBy(String key, String value) {
         return (root, query, criteriaBuilder) ->
                 switch (key) {
-                    case "title" -> criteriaBuilder.equal(root.get("title"), String.valueOf(value));
+                    case "title" -> criteriaBuilder.like(root.get("title"), "%" + value + "%");
                     case "dateBegin" -> criteriaBuilder.lessThanOrEqualTo(root.get("dateBegin"), Integer.parseInt(value));
                     case "zip" -> {
                         Join<FleaMarket, Address> addressJoin = root.join("address");
