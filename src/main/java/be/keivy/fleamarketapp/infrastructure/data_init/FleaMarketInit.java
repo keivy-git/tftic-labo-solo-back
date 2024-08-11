@@ -69,7 +69,7 @@ public class FleaMarketInit implements CommandLineRunner {
             fleaMarket2.setPricePerMeter(20);
             fleaMarket2.setLocationPrice(8);
             fleaMarket2.setOrganizer(organizerList.get(1));
-            fleaMarket2.setUrlPicture("https://www.quefaire.be/imgok/8578070_1.jpeg");
+            fleaMarket2.setUrlPicture("https://www.quefaire.be/imgok/8578069_1.jpeg");
             fleaMarket2.setNumberOfPlaces(250);
             fleaMarket2.setDateBegin(LocalDate.of(2024, 8, 11));
             fleaMarket2.setDateEnd(LocalDate.of(2024, 8, 15));
@@ -91,7 +91,7 @@ public class FleaMarketInit implements CommandLineRunner {
             fleaMarket3.setPricePerMeter(12);
             fleaMarket3.setLocationPrice(5);
             fleaMarket3.setOrganizer(organizerList.get(2));
-            fleaMarket3.setUrlPicture("https://www.quefaire.be/imgok/8578071_1.jpeg");
+            fleaMarket3.setUrlPicture("https://www.quefaire.be/imgok/8578069_1.jpeg");
             fleaMarket3.setNumberOfPlaces(150);
             fleaMarket3.setDateBegin(LocalDate.of(2024, 8, 15));
             fleaMarket3.setDateEnd(LocalDate.of(2024, 8, 15));
@@ -113,7 +113,7 @@ public class FleaMarketInit implements CommandLineRunner {
             fleaMarket4.setPricePerMeter(18);
             fleaMarket4.setLocationPrice(7);
             fleaMarket4.setOrganizer(organizerList.get(0));
-            fleaMarket4.setUrlPicture("https://www.quefaire.be/imgok/8578072_1.jpeg");
+            fleaMarket4.setUrlPicture("https://www.quefaire.be/imgok/8578069_1.jpeg");
             fleaMarket4.setNumberOfPlaces(180);
             fleaMarket4.setDateBegin(LocalDate.of(2024, 8, 16));
             fleaMarket4.setDateEnd(LocalDate.of(2024, 8, 16));
@@ -135,7 +135,7 @@ public class FleaMarketInit implements CommandLineRunner {
             fleaMarket5.setPricePerMeter(22);
             fleaMarket5.setLocationPrice(9);
             fleaMarket5.setOrganizer(organizerList.get(1));
-            fleaMarket5.setUrlPicture("https://www.quefaire.be/imgok/8578073_1.jpeg");
+            fleaMarket5.setUrlPicture("https://www.quefaire.be/imgok/8578069_1.jpeg");
             fleaMarket5.setNumberOfPlaces(220);
             fleaMarket5.setDateBegin(LocalDate.of(2024, 8, 17));
             fleaMarket5.setDateEnd(LocalDate.of(2024, 8, 17));
@@ -157,7 +157,7 @@ public class FleaMarketInit implements CommandLineRunner {
             fleaMarket6.setPricePerMeter(25);
             fleaMarket6.setLocationPrice(10);
             fleaMarket6.setOrganizer(organizerList.get(2));
-            fleaMarket6.setUrlPicture("https://www.quefaire.be/imgok/8578074_1.jpeg");
+            fleaMarket6.setUrlPicture("https://www.quefaire.be/imgok/8578069_1.jpeg");
             fleaMarket6.setNumberOfPlaces(250);
             fleaMarket6.setDateBegin(LocalDate.of(2024, 8, 18));
             fleaMarket6.setDateEnd(LocalDate.of(2024, 8, 18));
@@ -179,7 +179,7 @@ public class FleaMarketInit implements CommandLineRunner {
             fleaMarket7.setPricePerMeter(14);
             fleaMarket7.setLocationPrice(6);
             fleaMarket7.setOrganizer(organizerList.get(2));
-            fleaMarket7.setUrlPicture("https://www.quefaire.be/imgok/8578075_1.jpeg");
+            fleaMarket7.setUrlPicture("https://www.quefaire.be/imgok/8578069_1.jpeg");
             fleaMarket7.setNumberOfPlaces(180);
             fleaMarket7.setDateBegin(LocalDate.of(2024, 8, 19));
             fleaMarket7.setDateEnd(LocalDate.of(2024, 8, 19));
@@ -201,7 +201,7 @@ public class FleaMarketInit implements CommandLineRunner {
             fleaMarket8.setPricePerMeter(17);
             fleaMarket8.setLocationPrice(7);
             fleaMarket8.setOrganizer(organizerList.get(0));
-            fleaMarket8.setUrlPicture("https://www.quefaire.be/imgok/8578076_1.jpeg");
+            fleaMarket8.setUrlPicture("https://www.quefaire.be/imgok/8578069_1.jpeg");
             fleaMarket8.setNumberOfPlaces(200);
             fleaMarket8.setDateBegin(LocalDate.of(2024, 8, 20));
             fleaMarket8.setDateEnd(LocalDate.of(2024, 8, 20));
@@ -223,7 +223,7 @@ public class FleaMarketInit implements CommandLineRunner {
             fleaMarket9.setPricePerMeter(19);
             fleaMarket9.setLocationPrice(8);
             fleaMarket9.setOrganizer(organizerList.get(1));
-            fleaMarket9.setUrlPicture("https://www.quefaire.be/imgok/8578077_1.jpeg");
+            fleaMarket9.setUrlPicture("https://www.quefaire.be/imgok/8578069_1.jpeg");
             fleaMarket9.setNumberOfPlaces(230);
             fleaMarket9.setDateBegin(LocalDate.of(2024, 8, 21));
             fleaMarket9.setDateEnd(LocalDate.of(2024, 8, 21));
@@ -245,7 +245,7 @@ public class FleaMarketInit implements CommandLineRunner {
             fleaMarket10.setPricePerMeter(21);
             fleaMarket10.setLocationPrice(9);
             fleaMarket10.setOrganizer(organizerList.get(0));
-            fleaMarket10.setUrlPicture("https://www.quefaire.be/imgok/8578078_1.jpeg");
+            fleaMarket10.setUrlPicture("https://www.quefaire.be/imgok/8578069_1.jpeg");
             fleaMarket10.setNumberOfPlaces(240);
             fleaMarket10.setDateBegin(LocalDate.of(2024, 8, 22));
             fleaMarket10.setDateEnd(LocalDate.of(2024, 8, 22));
