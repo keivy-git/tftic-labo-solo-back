@@ -33,7 +33,7 @@ public interface FleaMarketMapper {
     @Mapping(source = "address.zipCity.zip", target = "address.zipCity.zip")
     void updateEntityFromRequest(FleaMarketRequest request, Address address, @MappingTarget FleaMarket fleaMarket);
 
-    @Mapping(source = "content", target = "fleaMarketResponses", defaultExpression = "java(java.util.Collections.emptyList())")
+    @Mapping(source = "content", target = "fleaMarkets", defaultExpression = "java(java.util.Collections.emptyList())")
     @Mapping(source = "size", target = "elementsPerPage")
     FleaMarketPagedResponse fromPage(Page<FleaMarket> page);
 
