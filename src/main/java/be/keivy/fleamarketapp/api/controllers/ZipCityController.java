@@ -29,7 +29,7 @@ public class ZipCityController {
             @RequestParam(required = false) String zip,
             @RequestParam(required = false) String city) {
         if (city == null && zip == null) {
-            return null;
+            return ResponseEntity.badRequest().body(null);
         } else {
             return ResponseEntity.ok(zipCityService.getByZipOrCity(zip, city));
         }
