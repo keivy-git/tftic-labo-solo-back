@@ -28,13 +28,16 @@ public class ZipCityService implements IZipCityService {
 
     @Override
     public List<ZipCityResponse> getByZipOrCity(String zip, String city) {
-        return zipCityRepository.findAll()
+        return zipCityRepository.findByZipAndCity(zip, city)
                 .stream()
-                .filter(zipCity ->
-                        (city == null || zipCity.getCity().equalsIgnoreCase(city)) &&
-                                (zip == null || zipCity.getZip().equalsIgnoreCase(zip))
-                ).map(zipCityMapper::fromEntity)
-                .collect(Collectors.toList());
+                .map(zipCityMapper::fromEntity)
+                .toList();
+//                .stream()
+//                .filter(zipCity ->
+//                        (city == null || zipCity.getCity().startsWith(city)) &&
+//                                (zip == null || zipCity.getZip().startsWith(zip))
+//                ).map(zipCityMapper::fromEntity)
+//                .collect(Collectors.toList());
     }
 
 }
